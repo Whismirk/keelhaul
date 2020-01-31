@@ -1,0 +1,20 @@
+#!/bin/bash
+
+lyrics=()
+lyrics[0]="Keelhauled that filthy landlubber and sent him down to the depths below !"
+lyrics[1]="Made that bastard walk the plank with a bottle of rum and the yo-oh-oh !"
+lyrics[2]="The sharks will dine upon its flesh and Davy Jones will have its soul !"
+lyrics[3]="Took his money and his hat, he won't need him where he is gonna go !"
+lyrics[4]="Tied that scoundrel to a rope and threw him overboard !"
+lyrics[5]="Dragged him underneath the ship, a terrifying deadly trip !"
+
+i=0
+for arg in "$@"
+do
+	if [ -n "$(pidof $arg)" ]
+	then
+		killall -q $arg
+		echo -e  $arg ':' ${lyrics[(($i%${#lyrics[@]}))]}
+		i=$((i+1))
+	fi
+done
